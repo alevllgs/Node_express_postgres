@@ -10,7 +10,7 @@ export const getPosts = async (req, res) => {
 };
 
 export const addPost = async (req, res) => {
-  const { titulo, img, descripcion, likes = 0 } = req.body; // Asegúrate de que 'img' esté aquí
+  const { titulo, img, descripcion, likes = 0 } = req.body;
   try {
     const result = await pool.query(
       'INSERT INTO posts (titulo, img, descripcion, likes) VALUES ($1, $2, $3, $4) RETURNING *',
