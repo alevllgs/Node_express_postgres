@@ -5,13 +5,14 @@ export const getAllPosts = async () => {
   return result.rows;
 };
 
-export const createPost = async (titulo, img, descripcion, likes) => {
+export const createPost = async (titulo, img, descripcion, likes = 0) => {
   const result = await pool.query(
     'INSERT INTO posts (titulo, img, descripcion, likes) VALUES ($1, $2, $3, $4) RETURNING *',
     [titulo, img, descripcion, likes]
   );
   return result.rows[0];
 };
+
 
 
 

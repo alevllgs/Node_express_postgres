@@ -1,5 +1,3 @@
-// aca va las rutas de las logicas pra conectarlo
-
 import { Router } from 'express';
 import { getPosts, addPost } from '../controllers/like.controller.js';
 
