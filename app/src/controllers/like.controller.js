@@ -1,3 +1,5 @@
+// app/src/controllers/like.controller.js
+
 import pool from '../../database/config.js';
 
 export const getPosts = async (req, res) => {
@@ -22,16 +24,15 @@ export const addPost = async (req, res) => {
   }
 };
 
-export const updatePost = async (req, res) => {
+export const updatePostLikes = async (req, res) => {
   const { id } = req.params;
-  const { titulo, img, descripcion, likes } = req.body;
   try {
     const result = await pool.query(
-      'UPDATE posts SET titulo = $1, img = $2, descripcion = $3, likes = $4 WHERE id = $5 RETURNING *',
-      [titulo, img, descripcion, likes, id]
+      'UPDATE posts SET likes = likes + 1 WHERE id = $1 RETURNING *',
+      [id]
     );
     if (result.rowCount === 0) {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json({ message: "Post no encontrado" });
     }
     res.json(result.rows[0]);
   } catch (error) {
@@ -44,9 +45,9 @@ export const deletePost = async (req, res) => {
   try {
     const result = await pool.query('DELETE FROM posts WHERE id = $1 RETURNING *', [id]);
     if (result.rowCount === 0) {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json({ message: "Post encontrado" });
     }
-    res.json({ message: "Post deleted successfully" });
+    res.json({ message: "Post borrado" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
