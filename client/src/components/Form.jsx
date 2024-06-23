@@ -1,4 +1,4 @@
-function Form({ setTitulo, setImgSRC, setDescripcion, agregarPost }) {
+function Form({ setTitulo, setImg, setDescripcion, agregarPost }) {
   return (
     <div className="form">
       <div className="mb-2">
@@ -12,7 +12,7 @@ function Form({ setTitulo, setImgSRC, setDescripcion, agregarPost }) {
       <div className="mb-2">
         <label>URL de la imagen</label>
         <input
-          onChange={(event) => setImgSRC(event.target.value)}
+          onChange={(event) => setImg(event.target.value)}
           className="form-control"
         />
       </div>
@@ -33,3 +33,4 @@ function Form({ setTitulo, setImgSRC, setDescripcion, agregarPost }) {
 }
 
 export default Form;
+

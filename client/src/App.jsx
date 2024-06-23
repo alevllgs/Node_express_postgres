@@ -7,7 +7,7 @@ const urlBaseServer = "http://localhost:3000";
 
 function App() {
   const [titulo, setTitulo] = useState("");
-  const [imgSrc, setImgSRC] = useState("");
+  const [img, setImg] = useState(""); 
   const [descripcion, setDescripcion] = useState("");
   const [posts, setPosts] = useState([]);
 
@@ -17,13 +17,16 @@ function App() {
   };
 
   const agregarPost = async () => {
-    const post = { titulo, url: imgSrc, descripcion };
+    const post = { titulo, img, descripcion }; 
     await axios.post(urlBaseServer + "/posts", post);
     getPosts();
+    setTitulo("");
+    setImg(""); 
+    setDescripcion("");
   };
 
   const like = async (id) => {
-    await axios.put(urlBaseServer + `/posts/${id}`); // Corregir la ruta para incluir el ID
+    await axios.put(urlBaseServer + `/posts/like/${id}`);
     getPosts();
   };
 
@@ -43,7 +46,7 @@ function App() {
         <div className="col-12 col-sm-4">
           <Form
             setTitulo={setTitulo}
-            setImgSRC={setImgSRC}
+            setImg={setImg} 
             setDescripcion={setDescripcion}
             agregarPost={agregarPost}
           />
